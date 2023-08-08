@@ -1,40 +1,53 @@
 <?php 
 
-// elle permet d'inclure une page dans une autre 
-require_once("etudiant.php");
 
 class Personne{
     // les proprietes 
     public $prenom;
     public $nom;
-    private $age;
-
-
+    public $sexe;
+    public $adresse;
     // constructeur 
-    public function __construct($prenom, $nom , $age)
+    public function __construct($p, $n, $s, $a)
     {
-        $this->prenom = $prenom;
-        $this->nom = $nom;
-        $this->age = $age;
+        $this->prenom = $p;
+        $this->nom = $n;
+        $this->sexe = $s;
+        $this->adresse = $a;
     }
-
-    // les methodes 
-    public function afficherInfo(){
+    // les methodes (actions)
+    public function affiche(){
         echo "
-            Prenom : $this->prenom <br>
-            Nom : $this->nom <br>
-            Age : $this->age ans <br>
+            Prenom: $this->prenom <br>
+            Nom: $this->nom <br>
+            Adresse: $this->adresse <br>
+            Sexe: $this->sexe <br>
+        
         ";
     }
 }
 
 
-// $p1 = new Personne();
+class Etudiant extends Personne{
+    public $code;
 
-// $p1->prenom = "Modou";
-// $p1->nom = "Ndiaye";
+    public function __construct($p, $n, $s, $a, $c)
+    {
+        parent::__construct($p, $n, $s, $a);
+        $this->code = $c;
+    }
+    public function affiche2(){
+        $this->affiche();
+        echo "Code: $this->code <br>";
+    }
+}
 
-$et = new Etudiant("Astou", "Fall", 35, "ETU45647");
+$p1 = new Personne("Bassirou", "Niang", "Masculin", "pikine");
+
+$et = new Etudiant("Modou", "Ndiaye", "Masc", "mbour","4567dhhd");
+
+echo $et->affiche2();
 
 
-$et->afficher();
+
+echo $p1->affiche();
